@@ -1,0 +1,66 @@
+<!DOCTYPE  html>
+<html>
+	<head>
+		<style>
+			#map {
+			height: 400px;
+			width: 100%;
+			}
+		</style>
+	</head>
+<body>
+	<h3>Simpel Google Maps</h3>
+	<div id="map"></div>
+	<script>
+		function
+		initMap() {
+			var lokasi= {lat: -7.332889, lng: 112.7330892};
+			var map = new google.maps.Map(document.getElementById('map'), {zoom: 15,
+				center:  lokasi
+			});
+
+
+        var features = [
+          {
+            position: new google.maps.LatLng(-7.332889, 112.7330892),
+            type: 'info'
+          }
+        ];
+
+        // Create Info Windows Marker
+        var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h2 id="firstHeading" class="firstHeading">RUMAH SAYA</h2>'+
+            '<div id="bodyContent">'+
+            '<p>Latitude : -7.332889 <br>'+
+            'longitude: 112.7330892 </p>'+
+            '</div>'+
+            '</div>';
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+
+
+        // Create markers.
+        var custom_marker = "http://localhost/map-pertama/icon/Home.png";
+        features.forEach(function(feature) {
+          var marker = new google.maps.Marker({
+            position: feature.position,
+            icon: custom_marker,
+            map: map
+          });
+          marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+
+        });
+      }
+
+	</script>
+	<script async defer 
+	src ="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVMnhOuhE24qr3iPBefl-KYeMkhGjfvuQ&callback=initMap">
+	</script>
+	</body>
+</html>
